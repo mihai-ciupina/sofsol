@@ -1,0 +1,117 @@
+.full {
+	width: 570px;
+}
+
+.navbar {
+	background-color: #454545;
+	margin-bottom: 0;
+  border-radius: 0;
+	box-shadow: 1px 1px 4px 0px #000;
+}
+
+.sidenav {
+    padding-top: 20px;
+    background-color: grey;
+    height: 100%;
+}
+
+/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+.row.content {
+	height: 100%;
+	min-height: 450px;
+	background-color: #fff;
+}
+
+.content {
+
+}
+
+/* Set black background color, white text and some padding */
+footer {
+  background-color: #555;
+  color: white;
+  padding: 15px;
+	box-shadow: 1px 1px 4px 1px #000;
+}
+
+/* On small screens, set height to 'auto' for sidenav and grid */
+@media screen and (max-width: 767px) {
+	.full {
+		width: 280px;
+	}
+
+  .sidenav {
+	height: auto;
+	padding: 15px;
+  }
+  .row.content {height:auto;}
+}
+
+/* .search */
+.sbx-custom {
+	display: inline-block;
+	position: relative;
+	height: 35px;
+	white-space: nowrap;
+	box-sizing: border-box;
+	font-size: 14px;
+	border: 0;
+	border-radius: 0;
+	box-shadow: inset 0 1px 0 1px fff;
+	background-color: #fff;
+	padding: 0;
+	padding-right: 3px;
+	padding-left: 3px;
+	height: 100%;
+	vertical-align: middle;
+}
+/*
+.search-line {
+	padding: 10px 20px;
+}*/
+
+.search-line {
+}
+
+.search-line>input {
+	padding: 6.5px;
+	margin: 0 0 10px;
+	font-size: 13px;
+	line-height: 1.42857143;
+	color: #666;
+	background-color: #fff;
+	border: 1px solid #999;
+	border-radius: 2px;
+}
+
+.search-box {
+	/*background-color: #9f9f9f;*/
+	background-color: #fff;
+
+}
+/* search. */
+pre {
+	border: 0px solid #ccc;
+	background-color: #f7fbfe;
+}
+
+pre code {
+	color: #4e25c7;
+	white-space: pre !important;
+}
+
+.btn-group-top {
+	padding-top: 14px;
+	padding-bottom: 2px;
+}
+
+.btn-primary.register {
+	color: #fff;
+	background-color: #ec5d57;
+	border-color: #d4544e;
+}
+
+h1.register {
+	font-size: 28px;
+	color: #ec5d57;
+}
