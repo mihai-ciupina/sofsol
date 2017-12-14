@@ -1,9 +1,5 @@
 <?php
-	$email = array(
-		'type' => 'email',
-		'name' => 'email_value',
-		'class' => ''
-	);
+	$email = array(		'type' => 'email',		'name' => 'email_value',		'class' => 'form-control'	);
 ?>
 
 <main role="main">
@@ -13,11 +9,23 @@
 
 				<?php echo form_open('user_authentication/new_user_registration'); ?>
 
+					<?php
+						echo "<div class='error_msg'>";
+						if(isset($message_display)) {
+							echo $message_display;
+						}
+						echo "</div>";
+					?>
+
 					<div class="form-group">
-						<label class="control-label" for="customer_name">Name</label>
+						<label class="control-label" for="name">Name</label>
 						<input class="form-control" id="name" name="name" type="text">
 					</div>
 
+					<div class="form-group">
+						<label class="control-label" for="email">Name</label>
+						<?php	echo form_input($email); ?>
+					</div>
 
 				  <div class="form-group">
 				  	<div class="row">
@@ -72,4 +80,10 @@
 </div>
 
 <?php   ?>
-<?php echo form_submit('submit', 'Sign Up'); ?>
+<?php
+	echo "<div class='error_msg'>";
+	if(isset($message_display)) {
+		echo $message_display;
+	}
+	echo "</div>";
+?>
