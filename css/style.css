@@ -115,3 +115,18 @@ h1.register {
 	font-size: 28px;
 	color: #ec5d57;
 }
+
+@media (min-width: 768px) {
+	.centered-ads {
+		position: relative;
+		left: 20%;
+		top: 50%;
+		-webkit-transform: translate(0%, -50%);
+		transform: translate(0%, -50%);
+	}
+	.centered-ads-wrapper {
+		height: 400px;
+	}
+}
+@media screen and (max-width: 767px) {
+}

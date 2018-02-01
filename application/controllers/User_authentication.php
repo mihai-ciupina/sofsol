@@ -132,14 +132,13 @@ Class User_authentication extends CI_Controller {
 
 	}
 
-
 	//validate and store data in database
 	public function new_user_registration() {
 
 		//check validation for user
 		$this->form_validation->set_rules('name', 'Name', 'trim|required');
 		$this->form_validation->set_rules('username', 'Username', 'trim|required');
-		$this->form_validation->set_rules('email_value', 'Email', 'trim|required');
+		$this->form_validation->set_rules('email', 'Email', 'trim|required');
 		$this->form_validation->set_rules('password', 'Password', 'trim|required');
 
 		if($this->form_validation->run() == FALSE) {
@@ -150,7 +149,7 @@ Class User_authentication extends CI_Controller {
 			$data = array(
 				'name' => $this->input->post('name'),
 				'user_name' => $this->input->post('username'),
-				'user_email' => $this->input->post('email_value'),
+				'user_email' => $this->input->post('email'),
 				'user_password' => hash('sha256', $user_password_salt.$this->input->post('password')),
 				'user_password_salt' => $user_password_salt
 			);
@@ -194,7 +193,8 @@ Class User_authentication extends CI_Controller {
 						'username' => $this->input->post('username'),
 						'logged_in' => TRUE,
 						'user_category' => $result[0]->category,
-						'user_id' => $result[0]->id
+						'user_id' => $result[0]->id,
+						'user_status' => $result[0]->status
 					);
 
 					//$data['username'] = $this->input->post('username');
@@ -204,12 +204,12 @@ Class User_authentication extends CI_Controller {
 					$result = $this->login_database->read_user_information($data);
 					//var_dump($result);
 					if($result !== FALSE) {
-						$data = array(
-							'name'		=> $result[0]->name,
-							'username'	=> $result[0]->user_name,
-							'email'		=> $result[0]->user_email,
-							'password'	=> $result[0]->user_password
-						);
+						// $data = array(
+						// 	'name'		=> $result[0]->name,
+						// 	'username'	=> $result[0]->user_name,
+						// 	'email'		=> $result[0]->user_email,
+						// 	'password'	=> $result[0]->user_password
+						// );
 
 						redirect ('/question/index');
 
@@ -259,5 +259,10 @@ Class User_authentication extends CI_Controller {
 	}
 
 }
+
+// user statuses
+// unapproved - can search, cannot create, edit, delete, save
+// approved 	- can search, create public/private, edit his public/private, save his public/private
+// editor			- can all
 
 ?>

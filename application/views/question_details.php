@@ -27,8 +27,11 @@
 	<br />
 	<b>Tags: </b><?=htmlspecialchars($result[0]->tags)?>
 
-	<hr />
-	<div><?=$this->markdown->parse(htmlspecialchars($result[0]->desc))?></div>
+	<?php if($is_admin) { ?>
+		<hr />
+		<div><?=$this->markdown->parse(htmlspecialchars($result[0]->desc))?></div>
+	<?php } ?>
+
 
 	<hr />
 	<div><?=$this->markdown->parse($result[0]->code)?></div>
@@ -36,15 +39,18 @@
 	<br />
 	<br />
 
+	<?php if($result[0]->youtube) {
+		echo $result[0]->youtube;
+	 } ?>
 
-		<br />
+		<!-- <br />
 		<br />
 		<div class="reward">
 
 			<a href="https://paypal.me/CiupinaMihai" target="_blank">
 				<input style="height: 50px" type="image" src="https://cdn1.iconfinder.com/data/icons/banking/512/E1-128.png" border="0" name="submit" alt="PayPal – The safer, easier way to pay online!">
 			</a>
-		</div>
+		</div> -->
 
 	<?php
 		if($result[0]->private === "1") {

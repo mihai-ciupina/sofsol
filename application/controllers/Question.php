@@ -49,13 +49,37 @@ Class Question extends CI_Controller {
 
 
 
-	public function check_if_authorized($question_author = -1) {
+	public function check_if_authenticated() {
 		if ((!isset($this->session->userdata['logged_in'])) || (!$this->session->userdata['logged_in'])) // or whatever you use
 		{
 			redirect ('user_authentication/user_login_show');
-		} else if(($question_author !== -1)&&($question_author !== $this->session->userdata['user_id'])) {
+		}
+	}
+
+	public function check_if_user_status_approved() {
+		if($this->session->userdata['user_status'] === 'unapproved')
+		{
 			redirect ('search/index');
 		}
+	}
+
+	public function check_if_author($question_author = -1) {
+		if(($question_author !== -1)&&($question_author !== $this->session->userdata['user_id']))
+		{
+			redirect ('search/index');
+		}
+	}
+
+	public function check_if_authorized($question_author = -1) {
+		$this->check_if_authenticated();
+		$this->check_if_user_status_approved();
+		$this->check_if_author($question_author);
+	}
+
+	public function check_if_authorized_to_edit($question_author = -1) {
+		$this->check_if_authenticated();
+		$this->check_if_user_status_approved();
+		$this->check_if_author($question_author);
 	}
 
 	public function check_if_admin() {
@@ -67,11 +91,20 @@ Class Question extends CI_Controller {
 		}
 	}
 
+	public function bool_check_if_admin() {
+		if ((!isset($this->session->userdata['logged_in'])) || (!$this->session->userdata['logged_in'])) // or whatever you use
+		{
+			return false;
+		} else if("admin" !== $this->session->userdata['user_category']) {
+			return false;
+		}
 
+		return true;
+	}
 
 	//show cataloging page
 	public function show_question_form($question_id = 0) {
-		$this->check_if_authorized();
+		$this->check_if_authorized_to_edit();
 
 		if($question_id != 0) {
 			//update
@@ -179,6 +212,73 @@ Class Question extends CI_Controller {
 
 
 
+
+
+
+
+	//show question details
+	public function show_question_details_test($question_id = 0, $message_display = '') {
+
+
+
+		$this->load->library('markdown');
+
+		if(!isset($question_id) OR ($question_id == 0)) {
+			$data['message_display'] = $message_display;
+
+			$data['page_left'] = 'index';
+			$this->load->view('template',$data);
+
+		} else {
+
+			$data = array(
+				'id' 		=> $question_id
+			);
+
+			$result = $this->question_model->read_question_details($data);
+
+			if($result === false) { redirect ('/errors/page_missing'); }
+
+			// if question is private then logout
+			if($result[0]->private === "1") {$this->check_if_authorized($result[0]->author);}
+
+			$data['result'] = $result;
+			$data['composed_title'] =	$result[0]->title;
+			$data['is_admin'] = $this->bool_check_if_admin();
+			if($result[0]->domain) {	$data['composed_title'] .= " in " . $result[0]->domain;}
+			$data['message_display'] = $message_display;
+
+			if($result != FALSE) {
+
+
+
+				$xxx = json_decode($result[0]->desc, true);
+				var_dump(   $xxx["ep"]   );
+
+
+
+				$data['page_left'] = 'search';
+				$data['page_right'] = 'question_details';
+				$this->load->view('template', $data);
+
+				//$this->load->view('search_result', $data);
+			}
+		}
+
+
+
+	}
+
+
+
+
+
+
+
+
+
+
+
 	//show question details
 	public function show_question_details($question_id = 0, $message_display = '') {
 		// var_dump($message_display);
@@ -193,7 +293,7 @@ Class Question extends CI_Controller {
 		} else {
 
 			$data = array(
-				'id' => $question_id
+				'id' 		=> $question_id
 			);
 
 			$result = $this->question_model->read_question_details($data);
@@ -206,6 +306,7 @@ Class Question extends CI_Controller {
 
 			$data['result'] = $result;
 			$data['composed_title'] =	$result[0]->title;
+			$data['is_admin'] = $this->bool_check_if_admin();
 			if($result[0]->domain) {	$data['composed_title'] .= " in " . $result[0]->domain;}
 			$data['message_display'] = $message_display;
 
