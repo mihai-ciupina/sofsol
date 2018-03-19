@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-Class Question extends CI_Controller {
+Class Sospa extends CI_Controller {
 
 	public function __construct() {
 
@@ -16,34 +16,32 @@ Class Question extends CI_Controller {
 	 * show question list
 	 */
 	public function index() {
-		$this->check_if_admin();
+		// $this->check_if_admin();
 
 		$result = $this->question_model->get_all();
 
 		$data['result'] = $result;
 		if($result != FALSE) {
-			$data['page_left'] = 'search';
-			$data['page_right'] = 'index';
-			$this->load->view('template', $data);
+			$data['page_left'] = 'SPA/index1'; // search
+			$data['page_right'] = 'SPA/index2';
+			$this->load->view('SPA/template', $data);
 		}
 	}
 
 
 
-	public function get() {
+	public function search() {
 
 		$data = array(
 			'title' => $this->input->get('search_value'),
 			'domain' => $this->input->get('domain')
 		);
 
-
 		$result = $this->question_model->get_filtered($data);
-		//echo $this->question_model->get_filtered($data);
 
 		if($result !== FALSE) {
 			$data['result'] = $result;
-			$this->load->view('test', $data);
+			$this->load->view('SPA/result', $data);
 		}
 	}
 
@@ -313,13 +311,13 @@ Class Question extends CI_Controller {
 			$data['message_display'] = $message_display;
 
 			if($result != FALSE) {
-				$data['display_ad'] = true;
 
-				$data['page_left'] = 'search';
-				$data['page_right'] = 'question_details';
-				$this->load->view('template', $data);
+				// $data['page_left'] = 'search';
+				// $data['page_right'] = 'question_details';
+				$this->load->view('SPA/question_details', $data);
 
 				//$this->load->view('search_result', $data);
+
 			}
 		}
 	}

@@ -31,8 +31,8 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-				<li><a href="/welcome">How To Code Solutions</a></li>
-        <li><a href="/">search</a></li>
+				<li><a href="/question/show_question_details/513">How To Code Solutions</a></li>
+        <li><a href="/SPA/sospa">SPA search</a></li>
 				<li><a href="/welcome/contact">contact</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -42,7 +42,9 @@
 			<?php if("admin" === $this->session->userdata['user_category']) { ?>
 				<li><a href="/question/index">question list</a></li>
 				<li><a href="/seo/sitemap">~ sitemap</a></li>
+				<li><a href="/seo/sitemap_https">~ sitemap-https</a></li>
 				<li><a href="/sitemap/sitemap.xml">@ sitemap</a></li>
+				<li><a href="/sitemap/sitemap_https.xml">@ sitemap</a></li>
 			<?php } ?>
 
 			<li><a href="/question/show_question_form">+</a></li>

@@ -131,6 +131,26 @@ h1.register {
 @media screen and (max-width: 767px) {
 }
 
-textarea {
+/* SPA tabs */
+.ui-tabs-panel {
+	overflow-y: scroll;
+	max-height: 650px;
+}
+
+.ui-widget textarea, textarea {
 	font-family: Consolas, "Courier New", Courier, mono;
+	font-weight: bold;
+	color: black;
+}
+.ui-widget-content a {
+	color: #337ab7;
+}
+
+.btn-group .btn {
+	padding: 1px 1px;
+}
+
+.btn-group .btn-ms {
+	padding: 1px 6px;
+	color: Tomato;
 }

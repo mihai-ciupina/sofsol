@@ -34,23 +34,27 @@
 		</tbody>
 	</table>
 
-	<hr />
 
-	<div class="centered-ads-wrapper">
-		<div class="centered-ads">
+	<?php	if( (isset($display_ad)) && ($display_ad === true) ) { ?>
 
-			<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-			<!-- sofsol LR -->
-			<ins class="adsbygoogle"
-			style="display:inline-block;width:336px;height:280px"
-			data-ad-client="ca-pub-5508564355533349"
-			data-ad-slot="7926263159"></ins>
-			<script>
-			(adsbygoogle = window.adsbygoogle || []).push({});
-			</script>
+		<hr />
 
+		<div class="centered-ads-wrapper">
+			<div class="centered-ads">
+
+				<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+				<!-- sofsol LR -->
+				<ins class="adsbygoogle"
+				style="display:inline-block;width:336px;height:280px"
+				data-ad-client="ca-pub-5508564355533349"
+				data-ad-slot="7926263159"></ins>
+				<script>
+				(adsbygoogle = window.adsbygoogle || []).push({});
+				</script>
+
+			</div>
 		</div>
-	</div>
 
+		<hr />
 
-	<hr />
+	<?php }	?>

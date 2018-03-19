@@ -22,7 +22,7 @@ my_ajax = function (params, action, field){
 
 	$.ajax({
 		type: "GET",
-		url: "http://stackoverflow.solutions/index.php/question/" + action + "",
+		url: "https://stackoverflow.solutions/index.php/question/" + action + "",
 		data : params,
 		success: function(data, textStatus, jqXHR ){
 			switch(action){
