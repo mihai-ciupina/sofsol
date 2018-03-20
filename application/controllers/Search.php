@@ -11,6 +11,8 @@ Class Search extends CI_Controller {
 	public function show_search_form()
 	{
 		$data['page_left'] = 'search';
+		$data['page_right'] = 'vision';
+		
 		$this->load->view('template', $data);
 	}
 
